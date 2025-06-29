@@ -4,7 +4,8 @@ const path = require('path');
 const connectDB = require('./db');
 
 // Load environment variables from parent directory
-require('dotenv').config({ path: path.join(__dirname, '..', '.env.local') });
+const envFile = process.env.NODE_ENV === 'production' ? '.env.production' : '.env.local';
+require('dotenv').config({ path: path.join(__dirname, '..', envFile) });
 
 // Import routes
 const authRoutes = require('./routes/auth.routes');
@@ -21,7 +22,10 @@ connectDB();
 app.use(cors({
   origin: [
     process.env.FRONTEND_URL || 'http://localhost:5173',
-    process.env.PRODUCTION_FRONTEND_URL || 'https://ktj-ass-4-alpha-coders-projects-fae97fae.vercel.app',
+    process.env.PRODUCTION_FRONTEND_URL || 'https://ktj-ass-4.vercel.app',
+    'https://ktj-ass-4.vercel.app', // Main frontend URL
+    'https://ktj-ass-4-z82a.vercel.app', // Backend URL for dev testing
+    'https://ktj-ass-4-alpha-coders-projects-fae97fae.vercel.app', // Old URL for backwards compatibility
     'http://localhost:5174'  // Vite dev server fallback
   ],
   credentials: true
