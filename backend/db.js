@@ -5,10 +5,7 @@ const connectDB = async () => {
     // Default to a local MongoDB if MONGODB_URI is not set
     const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/news-dashboard';
     
-    const conn = await mongoose.connect(mongoURI, {
-      useUnifiedTopology: true,
-      useNewUrlParser: true,
-    });
+    const conn = await mongoose.connect(mongoURI);
 
     console.log(`MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
