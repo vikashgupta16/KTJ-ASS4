@@ -1,4 +1,4 @@
-import React from 'react';
+
 
 const CategoryTabs = ({ categories, activeCategory, onCategoryChange }) => {
   return (
