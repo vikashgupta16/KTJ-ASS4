@@ -1,0 +1,33 @@
+{
+  "name": "news-dashboard-backend",
+  "version": "1.0.0",
+  "description": "Backend for AI News Dashboard",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "@mozilla/readability": "^0.5.0",
+    "axios": "^1.10.0",
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^4.18.2",
+    "jsdom": "^25.0.1",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.16.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  },
+  "keywords": [
+    "news",
+    "api",
+    "backend",
+    "ai",
+    "summarization"
+  ],
+  "author": "",
+  "license": "ISC"
+}
