@@ -1,6 +1,12 @@
 import axios from 'axios';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+// Use environment variable or default based on current environment
+const API_BASE_URL = import.meta.env.VITE_API_URL || 
+  (import.meta.env.MODE === 'production' 
+    ? 'https://ktj-ass-4-alpha-coders-projects-fae97fae.vercel.app/api'
+    : 'http://localhost:5001/api');
+
+console.log('API Base URL:', API_BASE_URL);
 
 // Create axios instance with default config
 const apiClient = axios.create({

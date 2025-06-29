@@ -19,7 +19,11 @@ connectDB();
 
 // Middleware
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5174',
+  origin: [
+    process.env.FRONTEND_URL || 'http://localhost:5173',
+    process.env.PRODUCTION_FRONTEND_URL || 'https://ktj-ass-4-alpha-coders-projects-fae97fae.vercel.app',
+    'http://localhost:5174'  // Vite dev server fallback
+  ],
   credentials: true
 }));
 

@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [react()],
   build: {
     outDir: 'dist',
@@ -21,4 +21,8 @@ export default defineConfig({
       },
     },
   },
-})
+  define: {
+    // Ensure environment variables are available in production
+    'process.env.NODE_ENV': JSON.stringify(mode),
+  },
+}))
