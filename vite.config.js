@@ -3,7 +3,12 @@ import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => ({
-  plugins: [react()],
+  plugins: [
+    react({
+      // React 19 automatic JSX runtime
+      jsxRuntime: 'automatic'
+    })
+  ],
   build: {
     outDir: 'dist',
     sourcemap: false,
