@@ -10,6 +10,7 @@ require('dotenv').config({ path: path.join(__dirname, '..', '.env.local') });
 const authRoutes = require('./routes/auth.routes');
 const userRoutes = require('./routes/user.routes');
 const summarizerRoutes = require('./routes/summarizer.routes');
+const newsRoutes = require('./routes/news.routes');
 
 const app = express();
 
@@ -45,6 +46,7 @@ app.get('/health', (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/summarizer', summarizerRoutes);
+app.use('/api/news', newsRoutes);
 
 // Welcome endpoint
 app.get('/', (req, res) => {

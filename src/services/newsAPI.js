@@ -1,33 +1,32 @@
 import axios from 'axios';
 
-const NEWS_API_KEY = import.meta.env.VITE_NEWS_API_KEY;
-const BASE_URL = 'https://newsapi.org/v2';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
 
 // Create axios instance with default config
-const newsApiClient = axios.create({
-  baseURL: BASE_URL,
-  timeout: 10000,
+const apiClient = axios.create({
+  baseURL: `${API_BASE_URL}/news`,
+  timeout: 15000,
   headers: {
-    'X-API-Key': NEWS_API_KEY
+    'Content-Type': 'application/json'
   }
 });
 
-export const newsAPI = {  // Get articles by category
+export const newsAPI = {
+  // Get articles by category
   getArticlesByCategory: async (category = 'general', country = 'us') => {
     try {
-      if (!NEWS_API_KEY) {
-        throw new Error('News API key is required. Please add VITE_NEWS_API_KEY to your .env.local file.');
-      }
-
-      const response = await newsApiClient.get('/top-headlines', {
+      const response = await apiClient.get('/category', {
         params: {
           category,
-          country,
-          pageSize: 20
+          country
         }
       });
 
-      return response.data;
+      if (response.data.success) {
+        return response.data.data;
+      } else {
+        throw new Error(response.data.message || 'Failed to fetch news articles');
+      }
     } catch (error) {
       console.error('Error fetching articles by category:', error);
       
@@ -38,23 +37,22 @@ export const newsAPI = {  // Get articles by category
       );
     }
   },
+
   // Search articles by keyword
   searchArticles: async (query, sortBy = 'publishedAt') => {
     try {
-      if (!NEWS_API_KEY) {
-        throw new Error('News API key is required. Please add VITE_NEWS_API_KEY to your .env.local file.');
-      }
-
-      const response = await newsApiClient.get('/everything', {
+      const response = await apiClient.get('/search', {
         params: {
           q: query,
-          sortBy,
-          pageSize: 20,
-          language: 'en'
+          sortBy
         }
       });
 
-      return response.data;
+      if (response.data.success) {
+        return response.data.data;
+      } else {
+        throw new Error(response.data.message || 'Failed to search articles');
+      }
     } catch (error) {
       console.error('Error searching articles:', error);
       
@@ -65,21 +63,21 @@ export const newsAPI = {  // Get articles by category
       );
     }
   },
+
   // Get top headlines
   getTopHeadlines: async (country = 'us') => {
     try {
-      if (!NEWS_API_KEY) {
-        throw new Error('News API key is required. Please add VITE_NEWS_API_KEY to your .env.local file.');
-      }
-
-      const response = await newsApiClient.get('/top-headlines', {
+      const response = await apiClient.get('/headlines', {
         params: {
-          country,
-          pageSize: 20
+          country
         }
       });
 
-      return response.data;
+      if (response.data.success) {
+        return response.data.data;
+      } else {
+        throw new Error(response.data.message || 'Failed to fetch top headlines');
+      }
     } catch (error) {
       console.error('Error fetching top headlines:', error);
       
