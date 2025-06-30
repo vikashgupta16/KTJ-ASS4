@@ -246,6 +246,11 @@ npm run dev          # Start with nodemon (development)
 - Scroll through articles in each category
 - Click on any article to view details
 
+### Full Article Content
+- Click "Read Full Article" to open the original news source
+- Click "Extract Full Content" to get the complete article text without ads
+- Full content extraction uses backend proxy to bypass CORS restrictions
+
 ### AI Summarization
 - Click on an article to open the detail view
 - Click "Generate AI Summary" to get a concise summary
